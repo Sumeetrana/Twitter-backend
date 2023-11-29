@@ -24,7 +24,14 @@ router.post("/", async (req, res) => {
 })
 
 router.get("/", async (req, res) => {
-  const allUsers = await prisma.user.findMany();
+  const allUsers = await prisma.user.findMany(
+    {
+      select: {
+        name: true,
+        image: true
+      }
+    }
+  );
   res.status(200).json({users: allUsers})
 })
 
